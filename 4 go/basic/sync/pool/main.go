@@ -19,7 +19,8 @@ type Buffer struct {
 var numCalcsCreated int32
 
 func createBuffer() interface{} {
-	atomic.AddInt32(&numCalcsCreated, 1)
+
+	atomic.AddInt32(&numCalcsCreated, 1) //自定义pool的new函数，非线程安全
 	buffer := &Buffer{
 		data: make([]byte, datalen),
 	}
