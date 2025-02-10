@@ -104,22 +104,22 @@ func Insert(node *Node, key int) *Node {
 	return node
 }
 
-func delete(node *Node,key)*Node{
-	if root == nil {
-		return root
+func delete(node *Node, key int) *Node {
+	if node == nil {
+		return node
 	}
 
 	if key < node.key {
-		node.left = delete(node.left,key)
-	}else if key >  node.key {
-		node.right = delete(node.right,key)
-	}else {
+		node.left = delete(node.left, key)
+	} else if key > node.key {
+		node.right = delete(node.right, key)
+	} else {
 
 		if node.left == nil || node.right == nil {
 			var tmp *Node
 			if node.left != nil {
 				tmp = node.left
-			}else if node.right != nil {
+			} else if node.right != nil {
 				tmp = node.right
 			}
 
@@ -127,27 +127,27 @@ func delete(node *Node,key)*Node{
 				//左右子树均为空，直接删除节点（节点置空）
 				//tmp = node
 				node = nil
-			}else {
+			} else {
 				//更优雅的写法？
 				*node = *tmp
 			}
-		}else{
+		} else {
 			tmp := minValueNode(node.right)
 			node.key = tmp.key
-			node.right = delete(node.right,tmp.key)
+			node.right = delete(node.right, tmp.key)
 
 		}
 	}
 
-	if root == nil {
+	if node == nil {
 		return nil
 	}
 
-	
+	return node
+
 }
 
-
-func minValueNode(node *Node)*Node{
+func minValueNode(node *Node) *Node {
 	curr := node
 	for curr != nil {
 		curr = curr.left
